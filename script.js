@@ -1,3 +1,4 @@
+
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random()*3 + 1)
     if (randomNum === 1) {
@@ -39,7 +40,7 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 }
-function Game(){
+/*function Game(){
     let count = 0;
     let playerScore = 0;
     let computerScore = 0;
@@ -68,3 +69,12 @@ function Game(){
         console.log("Computer WINS Game");
     }
 }
+*/
+const btns = document.querySelectorAll('button');
+console.log(btns);
+btns.forEach((btn) => {
+    btn.addEventListener('click' , () =>{
+        const choice = btn.textContent;
+        console.log(playRound(choice, getComputerChoice()));
+    })
+})
