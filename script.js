@@ -70,11 +70,21 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 */
+let pScore = 0;
+let compScore = 0;
+
 const btns = document.querySelectorAll('button');
 console.log(btns);
 btns.forEach((btn) => {
     btn.addEventListener('click' , () =>{
         const choice = btn.textContent;
-        console.log(playRound(choice, getComputerChoice()));
+        let roundResult = playRound(choice, getComputerChoice());
+        if (roundResult === 'You Won!'){
+            pScore++;
+            document.querySelector('label.pScore').textContent = pScore;
+        } else if (roundResult === 'You Lost!'){
+            compScore ++;
+            document.querySelector('label.compScore').textContent = compScore;
+        }
     })
 })
