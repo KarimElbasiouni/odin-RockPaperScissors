@@ -73,18 +73,38 @@ function playRound(playerSelection, computerSelection) {
 let pScore = 0;
 let compScore = 0;
 
-const btns = document.querySelectorAll('button');
-console.log(btns);
+const btns = document.querySelectorAll('button'); //Selects rock, paper, and scissors buttons
 btns.forEach((btn) => {
     btn.addEventListener('click' , () =>{
-        const choice = btn.textContent;
-        let roundResult = playRound(choice, getComputerChoice());
-        if (roundResult === 'You Won!'){
+        const pChoice = btn.textContent;
+        const compChoice = getComputerChoice();
+        const resultContainer = document.querySelector("#results");
+        let round = playRound(pChoice, compChoice);
+        const roundResult = document.querySelector('#results .round-result');
+
+        if (round === 'You Won!'){
             pScore++;
             document.querySelector('label.pScore').textContent = pScore;
-        } else if (roundResult === 'You Lost!'){
+            roundResult.textContent =`Player wins round! ${pChoice} beats ${compChoice}`
+        } else if (round === 'You Lost!'){
             compScore ++;
             document.querySelector('label.compScore').textContent = compScore;
+            roundResult.textContent = `Computer wins round! ${compChoice} beats ${pChoice}`;
+        } else {
+            roundResult.textContent = "This round is a draw!";
+
         }
+
+
+        if (pScore === 5){
+            const endResult = document.createElement('div');
+            endResult.textContent = "Player wins game!"
+            resultContainer.appendChild(endResult);
+        } else if (compScore === 5){
+            const endResult = document.createElement('div');
+            endResult.textContent = "Computer wins game!"
+            resultContainer.appendChild(endResult);
+        }
+        
     })
 })
