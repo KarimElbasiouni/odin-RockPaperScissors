@@ -40,47 +40,42 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 }
-/*function Game(){
-    let count = 0;
-    let playerScore = 0;
-    let computerScore = 0;
-    while(count < 5){
-        let playerSelection = window.prompt("Rock, Paper, or Scissors?");
-        let computerSelection = getComputerChoice();
-        if (playRound(playerSelection, computerSelection) === "You Won!"){
-            console.log("Player WINS Round");
-            playerScore++;
-        }else if (playRound(playerSelection, computerSelection) === "You Lost!"){
-            console.log("Computer WINS Round");
-            computerScore++;
-        }else if(playRound(playerSelection, computerSelection) === "It's a draw!"){
-            console.log("This Round is a DRAW. No Points Awarded");
-        }else {
-            console.log("Please Make Sure to Spell Correctly");
-            count--;
-        }
-        count++
-    }
-    if (playerScore === computerScore){
-        console.log("It's a DRAW");
-    }else if (playerScore > computerScore){
-        console.log("Player WINS Game");
-    }else if (playerScore < computerScore){
-        console.log("Computer WINS Game");
-    }
-}
-*/
+
 let pScore = 0;
 let compScore = 0;
-
 const btns = document.querySelectorAll('button'); //Selects rock, paper, and scissors buttons
+const endResult = document.querySelector('.end-result');
+const roundResult = document.querySelector('#results .round-result');
+
+function resetGame(){
+    pScore = 0;
+    compScore = 0;
+    document.querySelector('label.pScore').textContent = pScore;
+    document.querySelector('label.compScore').textContent = compScore;
+    endResult.replaceChildren();
+    roundResult.replaceChildren();
+
+}
+function resetButton(){
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = "Reset";
+    const resetContainer = document.querySelector('.reset');
+    resetContainer.appendChild(resetBtn);
+    resetBtn.addEventListener('click', () => {
+        resetGame();
+        resetContainer.removeChild(resetBtn);
+        btns.forEach((btn)=> {btn.disabled = false;})
+    });
+
+
+
+}
 btns.forEach((btn) => {
     btn.addEventListener('click' , () =>{
         const pChoice = btn.textContent;
         const compChoice = getComputerChoice();
         const resultContainer = document.querySelector("#results");
         let round = playRound(pChoice, compChoice);
-        const roundResult = document.querySelector('#results .round-result');
 
         if (round === 'You Won!'){
             pScore++;
@@ -92,19 +87,20 @@ btns.forEach((btn) => {
             roundResult.textContent = `Computer wins round! ${compChoice} beats ${pChoice}`;
         } else {
             roundResult.textContent = "This round is a draw!";
-
         }
-
 
         if (pScore === 5){
-            const endResult = document.createElement('div');
             endResult.textContent = "Player wins game!"
             resultContainer.appendChild(endResult);
+            btns.forEach((btn) => {btn.disabled = true;});
+            resetButton();
         } else if (compScore === 5){
-            const endResult = document.createElement('div');
             endResult.textContent = "Computer wins game!"
             resultContainer.appendChild(endResult);
+            btns.forEach((btn) => {btn.disabled = true;});
+            resetButton();
         }
-        
+
     })
 })
+
