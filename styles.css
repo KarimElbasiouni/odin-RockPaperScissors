@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Tektur', cursive;
+}
+
+.header {
+    text-align: center;
+    background-color: #4a2467;
+    color:#e6b6ff;
+    font-size: 48px;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.rpsButtons{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+     
