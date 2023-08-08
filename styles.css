@@ -4,6 +4,7 @@
     text-decoration: none;
     list-style: none;
     font-family: 'Tektur', cursive;
+    color: #272727;
 }
 
 .header {
@@ -15,10 +16,47 @@
     padding: 12px;
 }
 
-.rpsButtons{
-    margin: auto;
+.rpsButtons {
+    margin: 24px;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
 }
+
+.rpsButtons > button{
+    margin: 24px;
+    width: 220px;
+    height: 220px;
+    border-radius: 8px;
+}
+button > .btnIcon{
+    font-size: 80px;
+    padding: 24px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #d0e7e5;
+}
      
+#results{
+    text-align:center;
+    font-weight: 400;
+}
+#results > .scores {
+    padding: 12px;
+    font-weight: 500;
+}
+#results > .end-result{
+    padding: 8px;
+    font-size:24px;
+    font-weight: 600;
+}
+
+.reset{
+    text-align: center;
+}
+.reset > button{
+    padding:12px;
+    border-radius: 8px;
+}

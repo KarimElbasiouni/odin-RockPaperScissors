@@ -48,23 +48,23 @@ const endResult = document.querySelector('.end-result');
 const roundResult = document.querySelector('#results .round-result');
 
 function resetGame(){
+    //Resets all scores and all messages displayed so that a new game can commence
     pScore = 0;
     compScore = 0;
     document.querySelector('label.pScore').textContent = pScore;
     document.querySelector('label.compScore').textContent = compScore;
     endResult.replaceChildren();
     roundResult.replaceChildren();
-
 }
 function resetButton(){
     const resetBtn = document.createElement('button');
     resetBtn.textContent = "Reset";
     const resetContainer = document.querySelector('.reset');
-    resetContainer.appendChild(resetBtn);
+    resetContainer.appendChild(resetBtn); //Adds reset button to the webpage
     resetBtn.addEventListener('click', () => {
         resetGame();
         resetContainer.removeChild(resetBtn);
-        btns.forEach((btn)=> {btn.disabled = false;})
+        btns.forEach((btn)=> {btn.disabled = false;}) //Once clicked, the reset button disappears and the R-P-S buttons are enabled again
     });
 
 
@@ -72,7 +72,7 @@ function resetButton(){
 }
 btns.forEach((btn) => {
     btn.addEventListener('click' , () =>{
-        const pChoice = btn.textContent;
+        const pChoice = document.querySelector('button .btnText').textContent;
         const compChoice = getComputerChoice();
         const resultContainer = document.querySelector("#results");
         let round = playRound(pChoice, compChoice);
@@ -80,7 +80,7 @@ btns.forEach((btn) => {
         if (round === 'You Won!'){
             pScore++;
             document.querySelector('label.pScore').textContent = pScore;
-            roundResult.textContent =`Player wins round! ${pChoice} beats ${compChoice}`
+            roundResult.textContent =`Player wins round! ${pChoice} beats ${compChoice}`;
         } else if (round === 'You Lost!'){
             compScore ++;
             document.querySelector('label.compScore').textContent = compScore;
@@ -90,12 +90,12 @@ btns.forEach((btn) => {
         }
 
         if (pScore === 5){
-            endResult.textContent = "Player wins game!"
+            endResult.textContent = "Player wins game!";
             resultContainer.appendChild(endResult);
             btns.forEach((btn) => {btn.disabled = true;});
             resetButton();
         } else if (compScore === 5){
-            endResult.textContent = "Computer wins game!"
+            endResult.textContent = "Computer wins game!";
             resultContainer.appendChild(endResult);
             btns.forEach((btn) => {btn.disabled = true;});
             resetButton();
